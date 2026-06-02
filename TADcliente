@@ -1,1 +1,68 @@
-a
+class Cliente:
+    def __init__(self, nome, cpf, telefone=None, email=None):
+        self._nome = None
+        self._cpf = None
+        self._telefone = None
+        self._email = None
+
+        if self.validarNome(nome):
+            self._nome = nome
+
+        if self.validarCPF(cpf):
+            self._cpf = self.limparCPF(cpf)
+
+        if self.validarTelefone(telefone):
+            self._telefone = telefone
+
+        if self.validarEmail(email):
+            self._email = email
+
+
+    def getNome(self):
+        return self._nome
+
+    def getCPF(self):
+     return self._cpf
+
+    def getTelefone(self):
+     return self._telefone
+
+    def getEmail(self):
+     return self._email
+
+    def alterarTelefone(self, telefone):
+        if self.validarTelefone(telefone):
+            self._telefone = telefone
+
+    def alterarEmail(self, email):
+        if self.validarEmail(email):
+         self._email = email
+
+    def validarNome(self, nome):
+        return (
+            nome is not None
+            and nome.strip() != ""
+            and len(nome.strip()) >= 5
+        )
+
+    def validarCPF(self, cpf):
+        if cpf is None:
+            return False
+
+        cpf = self.limparCPF(cpf)
+        return cpf.isdigit() and len(cpf) == 11
+
+    def validarTelefone(self, telefone):
+        if telefone is None or telefone == "":
+            return True  
+
+        return telefone.isdigit() and len(telefone) in (10, 11)
+
+    def validarEmail(self, email):
+        if email is None or email == "":
+            return True 
+
+        return "@" in email
+
+    def limparCPF(self, cpf):
+        return "".join(c for c in cpf if c.isdigit())
