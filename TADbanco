@@ -1,0 +1,55 @@
+class Banco:
+    def __init__(self, nome, codigo):
+        self._nome = None
+        self._codigo = None
+        self._contas = []
+
+        if self.validarNome(nome):
+            self._nome = nome
+
+        if self.validarCodigo(codigo):
+            self._codigo = codigo
+
+    def validarNome(self, nome):
+        return nome is not None and len(nome.strip()) >= 3
+
+    def validarCodigo(self, codigo):
+        return codigo > 0
+
+    def adicionarConta(self, conta):
+
+        if conta is None:
+            return False
+
+        if conta.getBanco() != self:
+            return False
+
+        if self.buscarConta(conta.getNumero()) is not None:
+            return False
+
+        self._contas.append(conta)
+        return True
+
+    def removerConta(self, numero):
+
+        conta = self.buscarConta(numero)
+
+        if conta is None:
+            return False
+
+        self._contas.remove(conta)
+        return True
+
+    def buscarConta(self, numero):
+
+        for conta in self._contas:
+            if conta.getNumero() == numero:
+                return conta
+
+        return None
+
+    def quantidadeContas(self):
+        return len(self._contas)
+
+    def listarContas(self):
+        return self._contas.copy()
