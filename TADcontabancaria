@@ -1,0 +1,47 @@
+class ContaBancaria:
+    def __init__(self, numero, titular, banco, saldoInicial):
+        self._numero = None
+        self._saldo = 0
+        self._titular = None
+        self._banco = None
+
+        if numero > 0:
+            self._numero = numero
+
+        if titular is not None:
+            self._titular = titular
+
+        if banco is not None:
+            self._banco = banco
+
+        if saldoInicial >= 0:
+            self._saldo = saldoInicial
+
+    def depositar(self, valor):
+        if valor > 0:
+            self._saldo += valor
+
+    def sacar(self, valor):
+        if valor <= 0:
+            return False
+
+        if valor > self._saldo:
+            return False
+
+        self._saldo -= valor
+        return True
+
+    def consultarSaldo(self):
+        return self._saldo
+
+    def getNumero(self):
+        return self._numero
+
+    def getTitular(self):
+        return self._titular
+
+    def getBanco(self):
+        return self._banco
+
+    def estaAtiva(self):
+        return self._saldo > 0
