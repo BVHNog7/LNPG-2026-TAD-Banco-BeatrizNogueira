@@ -1,0 +1,40 @@
+def validarTexto(texto, tamanhoMinimo):
+    return (
+        texto is not None
+        and texto.strip() != ""
+        and len(texto.strip()) >= tamanhoMinimo
+    )
+
+
+def limparCPF(cpf):
+    return "".join(c for c in cpf if c.isdigit())
+
+
+def validarCPF(cpf):
+
+    if cpf is None:
+        return False
+
+    cpf = limparCPF(cpf)
+
+    return cpf.isdigit() and len(cpf) == 11
+
+
+def validarTelefone(telefone):
+
+    if telefone is None or telefone == "":
+        return True
+
+    return telefone.isdigit() and len(telefone) in (10, 11)
+
+
+def validarEmail(email):
+
+    if email is None or email == "":
+        return True
+
+    return "@" in email
+
+
+def numeroPositivo(numero):
+    return numero > 0
